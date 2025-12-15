@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>mirAI - Serviços Inteligentes | Design, Vídeo e Automação</title>
+    <meta name="description" content="Design, Vídeo e Tecnologia acessíveis baseadas em IA para o seu negócio. Marketing Digital, Automações e Sistemas." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              mirai: {
+                dark: '#020617', // Slate 950
+                card: '#0f172a', // Slate 900
+                primary: '#06b6d4', // Cyan 500
+                glow: '#22d3ee', // Cyan 400
+                accent: '#3b82f6', // Blue 500
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #020617;
+        color: #f8fafc;
+      }
+      .neon-border {
+        box-shadow: 0 0 5px theme('colors.mirai.primary'), inset 0 0 5px theme('colors.mirai.primary');
+      }
+      .neon-text {
+        text-shadow: 0 0 10px theme('colors.mirai.glow');
+      }
+      .glass-card {
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(34, 211, 238, 0.2);
+      }
+      
+      /* Utilities */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.4s ease-out forwards;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.560.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  </body>
+</html>
