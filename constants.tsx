@@ -5,59 +5,7 @@ import {
   Globe, 
   Cpu
 } from 'lucide-react';
-import { ServiceCategory, SubscriptionPackage } from './types';
-
-// Individual Service Exports for flexible usage
-export const SERVICE_VISUAL: ServiceCategory = {
-  id: 'visual',
-  title: 'Identidade Visual & Imagens',
-  subtitle: 'Do conceito à arte final',
-  icon: ImageIcon,
-  description: 'Imagens que vendem. Acabe com a aleatoriedade da IA.',
-  items: [
-    {
-      service: 'Criação de Imagem Comum',
-      description: 'Geração de imagem de alto impacto visual sem edição complexa.',
-      price: 'R$ 15,00',
-      additional: '+ R$ 5,00 por Movimento'
-    },
-    {
-      service: 'Imagem Trabalhada (Comercial)',
-      description: 'Pronta para uso corporativo. Inserção de logo, ajuste de cores, templates.',
-      price: 'R$ 20,00',
-      additional: '+ R$ 5,00 por Movimento'
-    },
-    {
-      service: 'Personagens & Avatares',
-      description: 'Desenvolvimento de mascotes ou humanos virtuais com consistência.',
-      price: 'R$ 25,00',
-      additional: '+ R$ 5,00 por Movimento'
-    }
-  ]
-};
-
-export const SERVICE_VIDEO: ServiceCategory = {
-  id: 'video',
-  title: 'Vídeo & Mídia Sintética',
-  subtitle: 'O Padrão 8 Segundos',
-  icon: Video,
-  description: 'Clips de alto impacto visual para conectar sua marca.',
-  items: [
-    {
-      service: 'Vídeo Short AI (8s)',
-      description: 'Geração de 1 clipe de até 8s a partir de imagem ou texto.',
-      price: 'R$ 35,00 / vídeo',
-      additional: 'Limite de 3 vídeos por semana por cliente'
-    },
-    {
-      service: 'Adicional de Edição',
-      description: 'Unir 2 ou mais clips, colocar trilha sonora e legendas.',
-      price: '+ R$ 5,00 / clip',
-      additional: '+ R$ 5,00 por clipe extra'
-    }
-  ],
-  extraInfo: 'Política de Refação: Nova geração custa R$ 5,00.'
-};
+import { ServiceCategory, SubscriptionPackage, PortfolioItem } from './types';
 
 export const SERVICE_SITES: ServiceCategory = {
   id: 'sites',
@@ -144,14 +92,6 @@ export const SERVICE_SYSTEMS: ServiceCategory = {
   ]
 };
 
-export const SERVICES = [
-  SERVICE_VISUAL,
-  SERVICE_VIDEO,
-  SERVICE_AUTOMATION,
-  SERVICE_SYSTEMS,
-  SERVICE_SITES
-];
-
 export const PACKAGES: SubscriptionPackage[] = [
   {
     name: 'MIRAI START',
@@ -200,5 +140,47 @@ export const PACKAGES: SubscriptionPackage[] = [
       'Ideal para: Crescimento acelerado'
     ],
     idealFor: 'Crescimento'
+  }
+];
+
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [
+  {
+    category: 'image',
+    title: 'Mascote 3D para Tech',
+    description: 'Personagem consistente gerado para marca de software.',
+    tag: 'Design AI',
+    imageUrl: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    category: 'image',
+    title: 'Linha Gourmet',
+    description: 'Fotografia de produto hiper-realista para menu digital.',
+    tag: 'Marketing',
+    imageUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    category: 'video',
+    title: 'Teaser Futurista',
+    description: 'Vídeo short de 8s com transições fluídas via Gen-2.',
+    tag: 'Motion',
+    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    category: 'tech',
+    title: 'Automação de Leads',
+    description: 'Integração Instagram -> Planilha -> WhatsApp automático.',
+    tag: 'Automação'
+  },
+  {
+    category: 'tech',
+    title: 'Dashboard de Vendas',
+    description: 'Sistema web personalizado para controle de estoque e pedidos.',
+    tag: 'Sistemas'
+  },
+  {
+    category: 'image',
+    title: 'Retrato Corporativo',
+    description: 'Avatares profissionais para equipe sem custo de estúdio.',
+    tag: 'Identidade'
   }
 ];

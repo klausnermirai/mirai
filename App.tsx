@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Menu, 
@@ -14,18 +15,24 @@ import {
   Cpu,
   Globe,
   Phone,
-  Megaphone
+  Megaphone,
+  ArrowRight,
+  Eye,
+  Layout,
+  // Fix: Added missing Video icon import
+  Video
 } from 'lucide-react';
 import { 
   SERVICE_SITES, 
   SERVICE_AUTOMATION, 
   SERVICE_SYSTEMS, 
   PACKAGES, 
+  PORTFOLIO_ITEMS
 } from './constants';
 import { ServiceCategory } from './types';
 
 // Tab Identifiers
-type TabType = 'quem-somos' | 'marketing' | 'automacao' | 'sistemas-sites';
+type TabType = 'quem-somos' | 'marketing' | 'automacao' | 'sistemas-sites' | 'portfolio';
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -136,6 +143,12 @@ const App: React.FC = () => {
           <div className="md:hidden glass-card border-t border-white/10">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <button
+                  onClick={() => handleTabClick('portfolio')}
+                  className="text-white block px-3 py-2 rounded-md text-base w-full text-left"
+                >
+                  Ver Portfólio
+                </button>
+                <button
                   onClick={() => scrollToSection('contato')}
                   className="text-mirai-primary font-bold block px-3 py-2 rounded-md text-base w-full text-left"
                 >
@@ -165,6 +178,21 @@ const App: React.FC = () => {
             A tecnologia das Big Techs aplicada à realidade da sua empresa. 
             Fuja do "fazer sozinho" e dos custos altos.
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+             <button 
+                onClick={() => handleTabClick('portfolio')}
+                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold px-8 py-4 rounded-full transition-all"
+             >
+                <Eye className="w-5 h-5" /> Ver Amostras de Trabalho
+             </button>
+             <button 
+                onClick={() => scrollToSection('contato')}
+                className="bg-mirai-primary hover:bg-mirai-glow text-mirai-dark font-bold px-8 py-4 rounded-full transition-all shadow-lg"
+             >
+                Solicitar Orçamento
+             </button>
+          </div>
         </div>
       </section>
 
@@ -180,6 +208,7 @@ const App: React.FC = () => {
                         { id: 'marketing', label: 'Marketing Digital', icon: Megaphone },
                         { id: 'automacao', label: 'Automações', icon: Workflow },
                         { id: 'sistemas-sites', label: 'Sistemas e Sites', icon: Globe },
+                        { id: 'portfolio', label: 'Portfólio', icon: Eye },
                     ].map((tab) => {
                         const Icon = tab.icon;
                         const isActive = activeTab === tab.id;
@@ -224,59 +253,27 @@ const App: React.FC = () => {
                                     A Mirai nasce como uma alternativa ágil e econômica baseada em Inteligência Artificial para quem precisa de resultados rápidos sem perder a qualidade profissional.
                                 </p>
                              </div>
-                             
-                             <div className="grid md:grid-cols-2 gap-6">
-                                <div className="bg-mirai-dark/50 p-6 rounded-xl border border-white/5">
-                                    <h4 className="font-bold text-white mb-2">Custo-Benefício Real</h4>
-                                    <p className="text-sm text-gray-400">
-                                        Assinar Sora, Midjourney, ChatGPT Plus e ferramentas de automação custa centenas de dólares mensais. Aqui você paga em reais, apenas pelo que usa.
-                                    </p>
-                                </div>
-                                <div className="bg-mirai-dark/50 p-6 rounded-xl border border-white/5">
-                                    <h4 className="font-bold text-white mb-2">Profissionalização da IA</h4>
-                                    <p className="text-sm text-gray-400">
-                                        "Brincar" com IA é fácil. Implementar com consistência de marca, sem alucinações e com qualidade comercial exige técnica e curadoria humana.
-                                    </p>
-                                </div>
-                             </div>
                         </div>
                     </div>
                 )}
 
-                {/* 2. MARKETING DIGITAL (APENAS PACOTES) */}
+                {/* 2. MARKETING DIGITAL */}
                 {activeTab === 'marketing' && (
                     <div className="space-y-12">
-                        {/* Intro */}
                         <div className="text-center max-w-2xl mx-auto mb-8">
                             <h2 className="text-3xl font-bold text-white mb-4">Planos de Gestão de Conteúdo</h2>
                             <p className="text-gray-400 text-lg">
-                                Escolha o volume ideal para manter sua marca ativa e profissional com o poder da IA.
+                                Escolha o volume ideal para manter sua marca ativa e profissional.
                             </p>
                         </div>
 
-                        {/* Packages Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {PACKAGES.map((pkg, idx) => (
-                            <div 
-                                key={idx} 
-                                className={`rounded-2xl p-6 border flex flex-col relative transition-all duration-300 ${
-                                pkg.highlight 
-                                    ? 'bg-mirai-card/80 border-mirai-primary shadow-[0_0_30px_rgba(6,182,212,0.2)] md:scale-105 z-10' 
-                                    : 'bg-mirai-card/40 border-white/10 hover:border-white/20'
-                                }`}
-                            >
-                                {pkg.highlight && (
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-mirai-primary text-mirai-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                                    Mais Popular
-                                </div>
-                                )}
+                            <div key={idx} className={`rounded-2xl p-6 border flex flex-col relative transition-all duration-300 ${pkg.highlight ? 'bg-mirai-card/80 border-mirai-primary shadow-lg md:scale-105 z-10' : 'bg-mirai-card/40 border-white/10'}`}>
+                                {pkg.highlight && <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-mirai-primary text-mirai-dark text-xs font-bold px-3 py-1 rounded-full uppercase">Mais Popular</div>}
                                 <h3 className="text-xl font-bold text-white mb-2">{pkg.name}</h3>
-                                <div className="flex items-baseline mb-2">
-                                <span className="text-3xl font-bold text-mirai-primary">{pkg.price}</span>
-                                <span className="text-gray-500 text-sm ml-1">/mês</span>
-                                </div>
+                                <div className="flex items-baseline mb-2"><span className="text-3xl font-bold text-mirai-primary">{pkg.price}</span><span className="text-gray-500 text-sm ml-1">/mês</span></div>
                                 <p className="text-xs text-gray-400 mb-6 font-medium h-8">{pkg.subtitle}</p>
-
                                 <ul className="space-y-3 mb-8 flex-grow">
                                 {pkg.features.map((feature, fIdx) => (
                                     <li key={fIdx} className="flex items-start gap-2 text-sm text-gray-300">
@@ -285,71 +282,139 @@ const App: React.FC = () => {
                                     </li>
                                 ))}
                                 </ul>
-
-                                <button 
-                                    onClick={() => window.open('https://wa.me/5516994137703', '_blank')}
-                                    className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
-                                    pkg.highlight 
-                                        ? 'bg-mirai-primary text-mirai-dark hover:bg-mirai-glow shadow-lg' 
-                                        : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
-                                }`}>
-                                Escolher Plano
-                                </button>
+                                <button onClick={() => window.open('https://wa.me/5516994137703', '_blank')} className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${pkg.highlight ? 'bg-mirai-primary text-mirai-dark hover:bg-mirai-glow' : 'bg-white/5 text-white border border-white/10'}`}>Escolher Plano</button>
                             </div>
                             ))}
-                        </div>
-                        
-                        <div className="max-w-2xl mx-auto text-center mt-12 p-6 glass-card rounded-2xl border-dashed border-mirai-primary/30">
-                            <p className="text-gray-400 text-sm">
-                                <Sparkles className="w-4 h-4 inline-block mr-2 text-mirai-glow" />
-                                Todos os planos incluem curadoria humana para garantir que a IA siga exatamente o tom de voz da sua marca.
-                            </p>
                         </div>
                     </div>
                 )}
 
                 {/* 3. AUTOMAÇÕES */}
                 {activeTab === 'automacao' && (
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-5xl mx-auto space-y-12">
                         {renderServiceCard(SERVICE_AUTOMATION)}
-                        <div className="mt-8 grid md:grid-cols-3 gap-4 text-center">
-                            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                                <p className="text-mirai-primary font-bold text-lg mb-1">Make / Zapier</p>
-                                <p className="text-xs text-gray-500">Integrações robustas</p>
+                        
+                        {/* Exemplo Real Contextual */}
+                        <div className="bg-mirai-primary/5 rounded-3xl p-8 border border-mirai-primary/20">
+                            <h4 className="text-mirai-primary font-bold mb-4 flex items-center gap-2">
+                                <Sparkles className="w-5 h-5" /> Exemplo de Fluxo (Case Real)
+                            </h4>
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                                <div className="flex-1 text-center p-4 bg-white/5 rounded-xl border border-white/10">
+                                    <Instagram className="w-8 h-8 mx-auto mb-2 text-pink-500" />
+                                    <p className="text-xs font-bold">Comentário no Post</p>
+                                </div>
+                                <ArrowRight className="hidden md:block text-mirai-primary animate-pulse" />
+                                <div className="flex-1 text-center p-4 bg-white/5 rounded-xl border border-white/10">
+                                    <Workflow className="w-8 h-8 mx-auto mb-2 text-mirai-primary" />
+                                    <p className="text-xs font-bold">IA Qualifica Lead</p>
+                                </div>
+                                <ArrowRight className="hidden md:block text-mirai-primary animate-pulse" />
+                                <div className="flex-1 text-center p-4 bg-white/5 rounded-xl border border-white/10">
+                                    <MessageSquare className="w-8 h-8 mx-auto mb-2 text-green-500" />
+                                    <p className="text-xs font-bold">WhatsApp p/ Vendedor</p>
+                                </div>
                             </div>
-                            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                                <p className="text-mirai-primary font-bold text-lg mb-1">N8N</p>
-                                <p className="text-xs text-gray-500">Fluxos complexos</p>
-                            </div>
-                            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                                <p className="text-mirai-primary font-bold text-lg mb-1">API OpenAI</p>
-                                <p className="text-xs text-gray-500">Inteligência Real</p>
-                            </div>
+                            <p className="text-center text-sm text-gray-500 mt-6">
+                                Este fluxo economiza em média 12 horas mensais de triagem manual.
+                            </p>
                         </div>
                     </div>
                 )}
 
                 {/* 4. SISTEMAS E SITES */}
                 {activeTab === 'sistemas-sites' && (
-                    <div className="max-w-5xl mx-auto">
-                        <div className="text-center max-w-2xl mx-auto mb-8">
-                            <h2 className="text-2xl font-bold text-white mb-2">Desenvolvimento Sob Medida</h2>
-                            <p className="text-gray-400">
-                                De landing pages rápidas a sistemas de gestão complexos.
-                            </p>
-                        </div>
-                        
+                    <div className="max-w-5xl mx-auto space-y-12">
                         <div className="grid md:grid-cols-2 gap-6">
                             {renderServiceCard(SERVICE_SITES)}
                             {renderServiceCard(SERVICE_SYSTEMS)}
                         </div>
+
+                        {/* Exemplo Visual Contextual */}
+                        <div className="bg-white/5 rounded-3xl p-8 border border-white/10 overflow-hidden relative group">
+                             <div className="absolute top-0 right-0 w-32 h-32 bg-mirai-glow/20 rounded-full blur-3xl group-hover:bg-mirai-glow/40 transition-all" />
+                             <div className="flex flex-col md:flex-row gap-8 items-center">
+                                 <div className="flex-1">
+                                    <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                        <Layout className="w-6 h-6 text-mirai-primary" /> Padrão mirAI de Interface
+                                    </h4>
+                                    <p className="text-gray-400 text-sm mb-4">
+                                        Nossos sistemas seguem um padrão moderno de alta performance (SPA), com foco em experiência do usuário e tempo de carregamento instantâneo.
+                                    </p>
+                                    <ul className="space-y-2">
+                                        <li className="flex items-center gap-2 text-xs text-gray-300"><CheckCircle2 className="w-3 h-3 text-mirai-primary" /> Design Responsivo (Mobile First)</li>
+                                        <li className="flex items-center gap-2 text-xs text-gray-300"><CheckCircle2 className="w-3 h-3 text-mirai-primary" /> Painéis de Controle Intuitivos</li>
+                                        <li className="flex items-center gap-2 text-xs text-gray-300"><CheckCircle2 className="w-3 h-3 text-mirai-primary" /> Segurança com Certificado SSL</li>
+                                    </ul>
+                                 </div>
+                                 <div className="flex-1 w-full">
+                                     <div className="w-full aspect-video bg-mirai-dark rounded-xl border border-white/10 shadow-2xl relative p-2">
+                                         <div className="w-full h-full bg-mirai-card rounded-lg overflow-hidden flex flex-col">
+                                             <div className="h-4 bg-white/10 flex items-center px-2 gap-1"><div className="w-1 h-1 rounded-full bg-red-500"></div><div className="w-1 h-1 rounded-full bg-yellow-500"></div><div className="w-1 h-1 rounded-full bg-green-500"></div></div>
+                                             <div className="p-4 flex gap-4">
+                                                 <div className="w-12 h-12 bg-mirai-primary/20 rounded-lg"></div>
+                                                 <div className="flex-1 space-y-2">
+                                                     <div className="h-2 w-1/2 bg-white/20 rounded"></div>
+                                                     <div className="h-2 w-3/4 bg-white/10 rounded"></div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* 5. PORTFÓLIO */}
+                {activeTab === 'portfolio' && (
+                    <div className="max-w-6xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold text-white mb-4">Galeria de Criativos & Tech</h2>
+                            <p className="text-gray-400">Uma amostra da qualidade gerada por nossos especialistas e ferramentas.</p>
+                        </div>
                         
-                        <div className="mt-8 text-center bg-white/5 rounded-2xl p-6 border border-white/10">
-                             <p className="text-sm text-gray-400 max-w-2xl mx-auto">
-                                <Users className="w-5 h-5 mx-auto mb-2 text-mirai-primary" />
-                                Desenvolvemos painéis administrativos, sistemas de gestão interna, Apps para clientes e integrações de banco de dados.
-                                Para projetos específicos, agende uma reunião.
-                             </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {PORTFOLIO_ITEMS.map((item, idx) => (
+                                <div key={idx} className="glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-mirai-primary/40 transition-all group">
+                                    {item.category === 'tech' ? (
+                                        <div className="aspect-[4/3] bg-mirai-primary/10 flex flex-col items-center justify-center p-8 text-center">
+                                            <div className="w-16 h-16 rounded-full bg-mirai-primary/20 flex items-center justify-center mb-4">
+                                                {item.title.includes('Automação') ? <Workflow className="text-mirai-primary" /> : <Cpu className="text-mirai-primary" />}
+                                            </div>
+                                            <h4 className="text-white font-bold mb-2">{item.title}</h4>
+                                            <p className="text-xs text-gray-500 leading-relaxed">{item.description}</p>
+                                        </div>
+                                    ) : (
+                                        <div className="aspect-[4/3] relative overflow-hidden">
+                                            <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                            {item.category === 'video' && (
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <div className="w-12 h-12 rounded-full bg-mirai-primary/80 flex items-center justify-center backdrop-blur-sm animate-pulse">
+                                                        <Video className="text-mirai-dark w-6 h-6" />
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <div className="absolute top-3 right-3 bg-mirai-dark/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-mirai-primary border border-mirai-primary/20">
+                                                {item.tag}
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div className="p-5 border-t border-white/5 bg-mirai-card/30">
+                                        <h4 className="text-white font-bold mb-1 group-hover:text-mirai-primary transition-colors">{item.title}</h4>
+                                        <p className="text-xs text-gray-400">{item.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className="mt-16 text-center">
+                            <button 
+                                onClick={() => scrollToSection('contato')}
+                                className="inline-flex items-center gap-2 bg-mirai-primary text-mirai-dark font-bold px-10 py-4 rounded-full hover:bg-mirai-glow transition-all"
+                            >
+                                Gostou? Vamos começar seu projeto <ArrowRight className="w-5 h-5" />
+                            </button>
                         </div>
                     </div>
                 )}
@@ -400,7 +465,7 @@ const App: React.FC = () => {
               </p>
               <button 
                 onClick={() => window.open('https://wa.me/5516994137703', '_blank')}
-                className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white rounded-full font-bold transition-all"
+                className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-green-500/20"
               >
                 <MessageSquare className="w-5 h-5" />
                 Chamar no WhatsApp

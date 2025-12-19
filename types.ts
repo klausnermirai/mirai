@@ -25,3 +25,11 @@ export interface SubscriptionPackage {
   idealFor: string;
   highlight?: boolean;
 }
+
+export interface PortfolioItem {
+  category: 'image' | 'video' | 'tech';
+  title: string;
+  description: string;
+  imageUrl?: string;
+  tag: string;
+}
