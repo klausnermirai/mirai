@@ -144,43 +144,80 @@ export const PACKAGES: SubscriptionPackage[] = [
 ];
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
+  // 3 IMAGES
   {
     category: 'image',
-    title: 'Mascote 3D para Tech',
-    description: 'Personagem consistente gerado para marca de software.',
+    title: 'Design de Produto AI',
+    description: 'Renderização realista de embalagens utilizando ferramentas generativas.',
     tag: 'Design AI',
-    imageUrl: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop'
+    mediaUrl: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop'
   },
   {
     category: 'image',
-    title: 'Linha Gourmet',
-    description: 'Fotografia de produto hiper-realista para menu digital.',
+    title: 'Mascote Corporativo',
+    description: 'Criação de personagem consistente para branding digital.',
+    tag: 'Identidade',
+    mediaUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    category: 'image',
+    title: 'Campanha Social Media',
+    description: 'Artes de alto impacto para engajamento em redes sociais.',
     tag: 'Marketing',
-    imageUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1000&auto=format&fit=crop'
+    mediaUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop'
+  },
+  
+  // 2 VIDEOS (8s and 1min)
+  {
+    category: 'video',
+    title: 'Motion Short (8s)',
+    description: 'Vídeo rápido de 8 segundos focado em conversão e impacto visual.',
+    tag: 'Short Video',
+    mediaUrl: '#', // User will replace with their uploaded file
+    thumbnailUrl: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=1000&auto=format&fit=crop'
   },
   {
     category: 'video',
-    title: 'Teaser Futurista',
-    description: 'Vídeo short de 8s com transições fluídas via Gen-2.',
-    tag: 'Motion',
-    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop'
+    title: 'Institucional AI (1min)',
+    description: 'Apresentação completa de 1 minuto com narração e trilha inteligente.',
+    tag: 'Vídeo Longo',
+    mediaUrl: '#', // User will replace with their uploaded file
+    thumbnailUrl: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000&auto=format&fit=crop'
+  },
+
+  // 2 AUTOMATION VIDEOS
+  {
+    category: 'automation',
+    title: 'Automação de CRM',
+    description: 'Vídeo demonstrativo de integração automática entre redes e funil de vendas.',
+    tag: 'Automação',
+    mediaUrl: '#', // User will replace with their uploaded file
+    thumbnailUrl: 'https://images.unsplash.com/photo-1551288049-bbbda5366392?q=80&w=1000&auto=format&fit=crop'
   },
   {
-    category: 'tech',
-    title: 'Automação de Leads',
-    description: 'Integração Instagram -> Planilha -> WhatsApp automático.',
-    tag: 'Automação'
+    category: 'automation',
+    title: 'Fluxo de Atendimento',
+    description: 'IA qualificando leads e respondendo dúvidas frequentes em tempo real.',
+    tag: 'Automação',
+    mediaUrl: '#', // User will replace with their uploaded file
+    thumbnailUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop'
+  },
+
+  // 2 SYSTEM VIDEOS
+  {
+    category: 'system',
+    title: 'Sistema de Gestão Interna',
+    description: 'Painel administrativo personalizado para controle total do negócio.',
+    tag: 'Software',
+    mediaUrl: '#', // User will replace with their uploaded file
+    thumbnailUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop'
   },
   {
-    category: 'tech',
-    title: 'Dashboard de Vendas',
-    description: 'Sistema web personalizado para controle de estoque e pedidos.',
-    tag: 'Sistemas'
-  },
-  {
-    category: 'image',
-    title: 'Retrato Corporativo',
-    description: 'Avatares profissionais para equipe sem custo de estúdio.',
-    tag: 'Identidade'
+    category: 'system',
+    title: 'App de Cliente',
+    description: 'Interface exclusiva para clientes acompanharem pedidos e suporte.',
+    tag: 'App Web',
+    mediaUrl: '#', // User will replace with their uploaded file
+    thumbnailUrl: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000&auto=format&fit=crop'
   }
 ];

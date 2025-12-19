@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Menu, 
@@ -19,8 +18,10 @@ import {
   ArrowRight,
   Eye,
   Layout,
-  // Fix: Added missing Video icon import
-  Video
+  // Added missing Image import as ImageIcon
+  Image as ImageIcon,
+  Video as VideoIcon,
+  Play
 } from 'lucide-react';
 import { 
   SERVICE_SITES, 
@@ -370,51 +371,82 @@ const App: React.FC = () => {
                 {activeTab === 'portfolio' && (
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-12">
-                            <h2 className="text-3xl font-bold text-white mb-4">Galeria de Criativos & Tech</h2>
-                            <p className="text-gray-400">Uma amostra da qualidade gerada por nossos especialistas e ferramentas.</p>
+                            <h2 className="text-4xl font-bold text-white mb-4">Amostras do Trabalho</h2>
+                            <p className="text-gray-400 max-w-2xl mx-auto">
+                                Confira nossa galeria de resultados: imagens impactantes, vídeos cinematográficos, automações inteligentes e sistemas robustos.
+                            </p>
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {PORTFOLIO_ITEMS.map((item, idx) => (
-                                <div key={idx} className="glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-mirai-primary/40 transition-all group">
-                                    {item.category === 'tech' ? (
-                                        <div className="aspect-[4/3] bg-mirai-primary/10 flex flex-col items-center justify-center p-8 text-center">
-                                            <div className="w-16 h-16 rounded-full bg-mirai-primary/20 flex items-center justify-center mb-4">
-                                                {item.title.includes('Automação') ? <Workflow className="text-mirai-primary" /> : <Cpu className="text-mirai-primary" />}
+                                <div key={idx} className="glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-mirai-primary/40 transition-all group flex flex-col">
+                                    <div className="aspect-[4/3] relative overflow-hidden bg-mirai-card">
+                                        {item.category === 'image' ? (
+                                            <img 
+                                              src={item.mediaUrl} 
+                                              alt={item.title} 
+                                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full relative">
+                                                {/* In a real scenario, mediaUrl would be a video file. If it is '#', we show the thumbnail with a play icon. */}
+                                                {item.mediaUrl === '#' ? (
+                                                  <div className="w-full h-full relative">
+                                                     <img src={item.thumbnailUrl} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" />
+                                                     <div className="absolute inset-0 flex items-center justify-center">
+                                                         <div className="w-16 h-16 rounded-full bg-mirai-primary/80 flex items-center justify-center backdrop-blur-sm shadow-xl transform group-hover:scale-110 transition-transform">
+                                                             <Play className="text-mirai-dark w-8 h-8 fill-mirai-dark ml-1" />
+                                                         </div>
+                                                     </div>
+                                                  </div>
+                                                ) : (
+                                                  <video 
+                                                    src={item.mediaUrl} 
+                                                    className="w-full h-full object-cover" 
+                                                    muted 
+                                                    playsInline
+                                                    onMouseOver={e => (e.target as HTMLVideoElement).play()}
+                                                    onMouseOut={e => {
+                                                        const v = e.target as HTMLVideoElement;
+                                                        v.pause();
+                                                        v.currentTime = 0;
+                                                    }}
+                                                  />
+                                                )}
                                             </div>
-                                            <h4 className="text-white font-bold mb-2">{item.title}</h4>
-                                            <p className="text-xs text-gray-500 leading-relaxed">{item.description}</p>
+                                        )}
+                                        <div className="absolute top-3 right-3 bg-mirai-dark/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-mirai-primary border border-mirai-primary/20 uppercase tracking-wider">
+                                            {item.tag}
                                         </div>
-                                    ) : (
-                                        <div className="aspect-[4/3] relative overflow-hidden">
-                                            <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                            {item.category === 'video' && (
-                                                <div className="absolute inset-0 flex items-center justify-center">
-                                                    <div className="w-12 h-12 rounded-full bg-mirai-primary/80 flex items-center justify-center backdrop-blur-sm animate-pulse">
-                                                        <Video className="text-mirai-dark w-6 h-6" />
-                                                    </div>
-                                                </div>
-                                            )}
-                                            <div className="absolute top-3 right-3 bg-mirai-dark/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-mirai-primary border border-mirai-primary/20">
-                                                {item.tag}
-                                            </div>
+                                    </div>
+                                    
+                                    <div className="p-6 flex-grow border-t border-white/5 bg-mirai-card/30">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            {item.category === 'automation' && <Workflow className="w-4 h-4 text-mirai-primary" />}
+                                            {item.category === 'system' && <Cpu className="w-4 h-4 text-mirai-primary" />}
+                                            {item.category === 'video' && <VideoIcon className="w-4 h-4 text-mirai-primary" />}
+                                            {item.category === 'image' && <ImageIcon className="w-4 h-4 text-mirai-primary" />}
+                                            <h4 className="text-white font-bold group-hover:text-mirai-primary transition-colors">{item.title}</h4>
                                         </div>
-                                    )}
-                                    <div className="p-5 border-t border-white/5 bg-mirai-card/30">
-                                        <h4 className="text-white font-bold mb-1 group-hover:text-mirai-primary transition-colors">{item.title}</h4>
-                                        <p className="text-xs text-gray-400">{item.description}</p>
+                                        <p className="text-xs text-gray-400 leading-relaxed">{item.description}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                         
                         <div className="mt-16 text-center">
-                            <button 
-                                onClick={() => scrollToSection('contato')}
-                                className="inline-flex items-center gap-2 bg-mirai-primary text-mirai-dark font-bold px-10 py-4 rounded-full hover:bg-mirai-glow transition-all"
-                            >
-                                Gostou? Vamos começar seu projeto <ArrowRight className="w-5 h-5" />
-                            </button>
+                            <div className="p-8 rounded-3xl border border-dashed border-white/10 bg-white/5">
+                                <h3 className="text-xl font-bold text-white mb-2">Quer ver mais?</h3>
+                                <p className="text-gray-500 text-sm mb-6">
+                                    Cada negócio é único. Agende uma demonstração ao vivo para vermos como a IA pode transformar seus processos específicos.
+                                </p>
+                                <button 
+                                    onClick={() => scrollToSection('contato')}
+                                    className="inline-flex items-center gap-2 bg-mirai-primary text-mirai-dark font-bold px-10 py-4 rounded-full hover:bg-mirai-glow transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                                >
+                                    Solicitar Demonstração <ArrowRight className="w-5 h-5" />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}

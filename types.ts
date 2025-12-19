@@ -27,9 +27,10 @@ export interface SubscriptionPackage {
 }
 
 export interface PortfolioItem {
-  category: 'image' | 'video' | 'tech';
+  category: 'image' | 'video' | 'automation' | 'system';
   title: string;
   description: string;
-  imageUrl?: string;
+  mediaUrl?: string; // URL for image or video file
+  thumbnailUrl?: string; // Optional thumbnail for videos
   tag: string;
 }
