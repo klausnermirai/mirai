@@ -3,7 +3,6 @@ import {
   Menu, 
   X, 
   CheckCircle2, 
-  ArrowRight, 
   Sparkles,
   Zap,
   Mail,
@@ -11,27 +10,22 @@ import {
   Facebook,
   MessageSquare,
   Users,
-  Megaphone,
   Workflow,
   Cpu,
   Globe,
-  GraduationCap,
-  Phone
+  Phone,
+  Megaphone
 } from 'lucide-react';
 import { 
-  SERVICE_CHAT, 
-  SERVICE_VISUAL, 
-  SERVICE_VIDEO, 
   SERVICE_SITES, 
   SERVICE_AUTOMATION, 
   SERVICE_SYSTEMS, 
   PACKAGES, 
-  MENTORSHIP_SESSIONS,
 } from './constants';
 import { ServiceCategory } from './types';
 
 // Tab Identifiers
-type TabType = 'quem-somos' | 'conversacao' | 'marketing' | 'automacao' | 'sistemas-sites' | 'mentoria';
+type TabType = 'quem-somos' | 'marketing' | 'automacao' | 'sistemas-sites';
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,7 +43,6 @@ const App: React.FC = () => {
 
   const handleTabClick = (tab: TabType) => {
     setActiveTab(tab);
-    // Optional: Scroll to top of tab content if user is far down
     const content = document.getElementById('main-content');
     if (content) {
         const yOffset = -100; // Offset for sticky header
@@ -118,12 +111,6 @@ const App: React.FC = () => {
             
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <button
-                    onClick={() => handleTabClick('mentoria')}
-                    className={`hover:text-mirai-primary transition-colors px-3 py-2 rounded-md text-sm font-medium ${activeTab === 'mentoria' ? 'text-mirai-primary' : ''}`}
-                  >
-                    Mentoria
-                </button>
                 <button 
                    onClick={() => scrollToSection('contato')}
                    className="bg-mirai-primary hover:bg-mirai-glow text-mirai-dark font-bold px-4 py-2 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)]"
@@ -148,12 +135,6 @@ const App: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden glass-card border-t border-white/10">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <button
-                  onClick={() => handleTabClick('mentoria')}
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-                >
-                  Mentoria
-                </button>
                 <button
                   onClick={() => scrollToSection('contato')}
                   className="text-mirai-primary font-bold block px-3 py-2 rounded-md text-base w-full text-left"
@@ -191,16 +172,14 @@ const App: React.FC = () => {
       <section id="main-content" className="pb-24 pt-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            {/* 6 Fixed Tabs Navigation */}
+            {/* Tabs Navigation */}
             <div className="sticky top-20 z-40 bg-mirai-dark/90 backdrop-blur-md py-4 mb-8 -mx-4 px-4 md:mx-0 md:px-0 border-y border-white/5 md:border-none md:rounded-full md:bg-mirai-card/50">
                 <div className="flex overflow-x-auto md:justify-center gap-2 md:gap-4 no-scrollbar pb-2 md:pb-0">
                     {[
                         { id: 'quem-somos', label: 'Quem Somos', icon: Users },
-                        { id: 'conversacao', label: 'Conversação', icon: MessageSquare },
                         { id: 'marketing', label: 'Marketing Digital', icon: Megaphone },
                         { id: 'automacao', label: 'Automações', icon: Workflow },
                         { id: 'sistemas-sites', label: 'Sistemas e Sites', icon: Globe },
-                        { id: 'mentoria', label: 'Mentorias', icon: GraduationCap },
                     ].map((tab) => {
                         const Icon = tab.icon;
                         const isActive = activeTab === tab.id;
@@ -264,37 +243,15 @@ const App: React.FC = () => {
                     </div>
                 )}
 
-                {/* 2. CONVERSAÇÃO INTELIGENTE */}
-                {activeTab === 'conversacao' && (
-                    <div className="max-w-4xl mx-auto">
-                        {renderServiceCard(SERVICE_CHAT)}
-                    </div>
-                )}
-
-                {/* 3. MARKETING DIGITAL (VISUAL + VIDEO + PACOTES) */}
+                {/* 2. MARKETING DIGITAL (APENAS PACOTES) */}
                 {activeTab === 'marketing' && (
                     <div className="space-y-12">
                         {/* Intro */}
                         <div className="text-center max-w-2xl mx-auto mb-8">
-                            <h2 className="text-2xl font-bold text-white mb-2">Presença Digital Completa</h2>
-                            <p className="text-gray-400">
-                                Identidade visual, vídeos curtos e pacotes para redes sociais.
+                            <h2 className="text-3xl font-bold text-white mb-4">Planos de Gestão de Conteúdo</h2>
+                            <p className="text-gray-400 text-lg">
+                                Escolha o volume ideal para manter sua marca ativa e profissional com o poder da IA.
                             </p>
-                        </div>
-
-                        {/* Services Grid (Sites moved to separate tab) */}
-                        <div className="grid md:grid-cols-2 gap-6">
-                            {renderServiceCard(SERVICE_VISUAL)}
-                            {renderServiceCard(SERVICE_VIDEO)}
-                        </div>
-
-                        {/* Divider */}
-                        <div className="flex items-center gap-4 py-4">
-                            <div className="h-px bg-white/10 flex-grow"></div>
-                            <span className="text-mirai-primary font-bold uppercase tracking-widest text-sm bg-mirai-primary/5 px-4 py-1 rounded-full border border-mirai-primary/20">
-                                Pacotes Mensais Recorrentes
-                            </span>
-                            <div className="h-px bg-white/10 flex-grow"></div>
                         </div>
 
                         {/* Packages Grid */}
@@ -302,23 +259,23 @@ const App: React.FC = () => {
                             {PACKAGES.map((pkg, idx) => (
                             <div 
                                 key={idx} 
-                                className={`rounded-2xl p-6 border flex flex-col relative ${
+                                className={`rounded-2xl p-6 border flex flex-col relative transition-all duration-300 ${
                                 pkg.highlight 
-                                    ? 'bg-mirai-card/80 border-mirai-primary shadow-[0_0_20px_rgba(6,182,212,0.15)] md:scale-105 z-10' 
+                                    ? 'bg-mirai-card/80 border-mirai-primary shadow-[0_0_30px_rgba(6,182,212,0.2)] md:scale-105 z-10' 
                                     : 'bg-mirai-card/40 border-white/10 hover:border-white/20'
                                 }`}
                             >
                                 {pkg.highlight && (
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-mirai-primary text-mirai-dark text-xs font-bold px-3 py-1 rounded-full">
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-mirai-primary text-mirai-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                     Mais Popular
                                 </div>
                                 )}
                                 <h3 className="text-xl font-bold text-white mb-2">{pkg.name}</h3>
                                 <div className="flex items-baseline mb-2">
-                                <span className="text-2xl font-bold text-mirai-primary">{pkg.price}</span>
+                                <span className="text-3xl font-bold text-mirai-primary">{pkg.price}</span>
                                 <span className="text-gray-500 text-sm ml-1">/mês</span>
                                 </div>
-                                <p className="text-xs text-gray-400 mb-6 h-8">{pkg.subtitle}</p>
+                                <p className="text-xs text-gray-400 mb-6 font-medium h-8">{pkg.subtitle}</p>
 
                                 <ul className="space-y-3 mb-8 flex-grow">
                                 {pkg.features.map((feature, fIdx) => (
@@ -329,20 +286,29 @@ const App: React.FC = () => {
                                 ))}
                                 </ul>
 
-                                <button className={`w-full py-2 rounded-lg font-bold text-sm transition-all ${
-                                pkg.highlight 
-                                    ? 'bg-mirai-primary text-mirai-dark hover:bg-mirai-glow' 
-                                    : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
+                                <button 
+                                    onClick={() => window.open('https://wa.me/5516994137703', '_blank')}
+                                    className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
+                                    pkg.highlight 
+                                        ? 'bg-mirai-primary text-mirai-dark hover:bg-mirai-glow shadow-lg' 
+                                        : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
                                 }`}>
                                 Escolher Plano
                                 </button>
                             </div>
                             ))}
                         </div>
+                        
+                        <div className="max-w-2xl mx-auto text-center mt-12 p-6 glass-card rounded-2xl border-dashed border-mirai-primary/30">
+                            <p className="text-gray-400 text-sm">
+                                <Sparkles className="w-4 h-4 inline-block mr-2 text-mirai-glow" />
+                                Todos os planos incluem curadoria humana para garantir que a IA siga exatamente o tom de voz da sua marca.
+                            </p>
+                        </div>
                     </div>
                 )}
 
-                {/* 4. AUTOMAÇÕES */}
+                {/* 3. AUTOMAÇÕES */}
                 {activeTab === 'automacao' && (
                     <div className="max-w-4xl mx-auto">
                         {renderServiceCard(SERVICE_AUTOMATION)}
@@ -363,7 +329,7 @@ const App: React.FC = () => {
                     </div>
                 )}
 
-                {/* 5. SISTEMAS E SITES */}
+                {/* 4. SISTEMAS E SITES */}
                 {activeTab === 'sistemas-sites' && (
                     <div className="max-w-5xl mx-auto">
                         <div className="text-center max-w-2xl mx-auto mb-8">
@@ -384,46 +350,6 @@ const App: React.FC = () => {
                                 Desenvolvemos painéis administrativos, sistemas de gestão interna, Apps para clientes e integrações de banco de dados.
                                 Para projetos específicos, agende uma reunião.
                              </p>
-                        </div>
-                    </div>
-                )}
-
-                {/* 6. MENTORIAS */}
-                {activeTab === 'mentoria' && (
-                    <div className="max-w-5xl mx-auto">
-                        <div className="bg-mirai-card border border-mirai-primary/30 rounded-3xl p-8 md:p-12 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-mirai-primary/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                            
-                            <div className="relative z-10">
-                            <div className="text-center mb-10">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Mentoria Prática</h2>
-                                <p className="text-xl text-mirai-primary font-medium">Não é curso gravado. É ao vivo.</p>
-                                <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-                                Aprenda a "segurar o martelo" da IA. Ensinamos você e sua equipe a utilizarem as ferramentas que usamos na Mirai (ChatGPT, Midjourney, Claude, Make).
-                                </p>
-                            </div>
-
-                            <div className="grid md:grid-cols-3 gap-6 mb-12">
-                                {MENTORSHIP_SESSIONS.map((session, idx) => (
-                                <div key={idx} className="bg-mirai-dark/50 p-6 rounded-xl border border-white/10 hover:border-mirai-primary/40 transition-colors">
-                                    <session.icon className="w-8 h-8 text-mirai-primary mb-4" />
-                                    <h4 className="text-lg font-bold text-white mb-2">{session.title}</h4>
-                                    <p className="text-sm text-gray-400">{session.description}</p>
-                                </div>
-                                ))}
-                            </div>
-
-                            <div className="flex flex-col md:flex-row items-center justify-between bg-mirai-dark/80 p-6 rounded-2xl border border-mirai-primary/20">
-                                <div>
-                                <p className="text-sm text-gray-400 mb-1">Investimento Único</p>
-                                <p className="text-4xl font-bold text-white">R$ 300,00</p>
-                                <p className="text-xs text-gray-500 mt-1">3 Encontros de 50 min via Google Meet</p>
-                                </div>
-                                <button className="mt-4 md:mt-0 px-8 py-3 bg-mirai-primary text-mirai-dark font-bold rounded-full hover:bg-mirai-glow transition-all shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-                                Agendar Mentoria
-                                </button>
-                            </div>
-                            </div>
                         </div>
                     </div>
                 )}

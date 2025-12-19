@@ -3,41 +3,11 @@ import {
   Video, 
   Workflow, 
   Globe, 
-  Cpu, 
-  MessageSquare
+  Cpu
 } from 'lucide-react';
-import { ServiceCategory, SubscriptionPackage, MentorshipSession } from './types';
+import { ServiceCategory, SubscriptionPackage } from './types';
 
 // Individual Service Exports for flexible usage
-export const SERVICE_CHAT: ServiceCategory = {
-  id: 'text-chat',
-  title: 'Conversação Inteligente',
-  subtitle: "O 'Cérebro' da sua marca",
-  icon: MessageSquare,
-  description: 'Roteiros, Estratégias e Assistentes Virtuais (Chatbots).',
-  items: [
-    {
-      service: 'Elaboração de Ideias & Textos',
-      description: 'Criação de roteiros, legendas, e-mails ou planejamento de conteúdo.',
-      price: 'R$ 20,00',
-      additional: '+ R$ 5,00 por Movimento (Ajuste)'
-    },
-    {
-      service: 'Personalização de IA',
-      description: 'Criação de link de chat exclusivo treinado com dados da empresa.',
-      price: 'R$ 25,00',
-      additional: '+ R$ 5,00 por Movimento'
-    },
-    {
-      service: 'Mentoria Prática em IA',
-      description: 'Aula ao vivo ensinando a usar as ferramentas no dia a dia.',
-      price: 'R$ 100,00 / hora',
-      additional: 'Bônus: Inclui criação de 1 GPT'
-    }
-  ],
-  extraInfo: 'Movimento = Ação de Ajuste ou Refinamento. Ex: Pedir para reescrever com tom mais engraçado.'
-};
-
 export const SERVICE_VISUAL: ServiceCategory = {
   id: 'visual',
   title: 'Identidade Visual & Imagens',
@@ -63,8 +33,7 @@ export const SERVICE_VISUAL: ServiceCategory = {
       price: 'R$ 25,00',
       additional: '+ R$ 5,00 por Movimento'
     }
-  ],
-  extraInfo: 'Mentoria de Imagem: Aprenda a criar. R$ 75,00 / hora.'
+  ]
 };
 
 export const SERVICE_VIDEO: ServiceCategory = {
@@ -76,7 +45,7 @@ export const SERVICE_VIDEO: ServiceCategory = {
   items: [
     {
       service: 'Vídeo Short AI (8s)',
-      description: 'Geração de 1 clip de até 8s a partir de imagem ou texto.',
+      description: 'Geração de 1 clipe de até 8s a partir de imagem ou texto.',
       price: 'R$ 35,00 / vídeo',
       additional: 'Limite de 3 vídeos por semana por cliente'
     },
@@ -87,7 +56,7 @@ export const SERVICE_VIDEO: ServiceCategory = {
       additional: '+ R$ 5,00 por clipe extra'
     }
   ],
-  extraInfo: 'Política de Refação: Nova geração custa R$ 5,00. Mentoria Premium de Vídeo: R$ 150,00 / hora.'
+  extraInfo: 'Política de Refação: Nova geração custa R$ 5,00.'
 };
 
 export const SERVICE_SITES: ServiceCategory = {
@@ -175,9 +144,7 @@ export const SERVICE_SYSTEMS: ServiceCategory = {
   ]
 };
 
-// Grouping for the original array export if needed, or structured access
 export const SERVICES = [
-  SERVICE_CHAT,
   SERVICE_VISUAL,
   SERVICE_VIDEO,
   SERVICE_AUTOMATION,
@@ -233,23 +200,5 @@ export const PACKAGES: SubscriptionPackage[] = [
       'Ideal para: Crescimento acelerado'
     ],
     idealFor: 'Crescimento'
-  }
-];
-
-export const MENTORSHIP_SESSIONS: MentorshipSession[] = [
-  {
-    title: 'AULA 1: O Despertar',
-    description: 'Texto e Conversa. Sem termos técnicos. Aprenda a conversar com o ChatGPT do jeito certo.',
-    icon: MessageSquare
-  },
-  {
-    title: 'AULA 2: O Visual',
-    description: 'Imagens e Vídeos. Transforme ideias em fotos profissionais e dê movimento às imagens.',
-    icon: ImageIcon
-  },
-  {
-    title: 'AULA 3: O Próximo Nível',
-    description: 'Personalização. Como configurar uma IA para pensar como sua empresa.',
-    icon: Workflow
   }
 ];

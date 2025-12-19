@@ -25,9 +25,3 @@ export interface SubscriptionPackage {
   idealFor: string;
   highlight?: boolean;
 }
-
-export interface MentorshipSession {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-}
